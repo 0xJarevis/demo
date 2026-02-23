@@ -40,3 +40,14 @@ jobs:
           context: .
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/demo-app:latest
+
+  deploy-local:
+    needs: release-docker
+    runs-on: self-hosted
+    steps:
+      - name: Pull and Run App
+        run: |
+          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/demo-app:latest
+          docker stop demo-app || true
+          docker rm demo-app || true
+          docker run -d --name demo-app -p 8080:3000 ${{ secrets.DOCKERHUB_USERNAME }}/demo-app:latest
