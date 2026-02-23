@@ -30,4 +30,4 @@ jobs:
         uses: actions/checkout@v5
 
       - name: Build Docker Image
-        run: docker build -t my-devops-app:latest .
+        run: docker build -t demo-app:latest .
