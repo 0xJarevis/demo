@@ -31,7 +31,6 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
-          push: true
           file: Dockerfile.dev
           tags: ${{ steps.meta.outputs.REPO_NAME }}-dev:latest
           load: true
