@@ -1,0 +1,33 @@
+services:
+  react-prod:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      NODE_ENV: production
+    ports:
+      - 8080:8080
+
+  
+  react-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - 5173:5173
+    develop:
+      watch:
+        - action: sync
+          path: .
+          target: /app
+          ignore:
+            - node_modules/
+
+  
+  react-test:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    environment:
+      CI: true
+    command: ["npm", "run", "test"]
